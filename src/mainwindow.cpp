@@ -409,6 +409,14 @@ void MainWindow::on_pushButton_5_clicked()
         return;
     }
 
+    auto imgsavepath=std::filesystem::path(ui->lineEdit_4->text().toStdString());
+
+    if(!std::filesystem::exists(imgsavepath)){
+        QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),QString::fromLocal8Bit("图片保存路径不存在！"),QMessageBox::Ok,this);
+        message.exec();
+        return;
+    }
+
     int writer_fps;
     float downsample_ratio;
 
@@ -429,7 +437,7 @@ void MainWindow::on_pushButton_5_clicked()
 
     mRobustVideoMatting->detect(originImg,mPictureContents,downsample_ratio,backgroundColor,false);
 
-    cv::imwrite(imgPath.string()+".output.jpg",mPictureContents.merge_mat);
+    cv::imwrite(imgsavepath.string()+"/"+imgPath.filename().string()+".output.jpg",mPictureContents.merge_mat);
 
     QMessageBox message(QMessageBox::Information,QString::fromLocal8Bit("提示："),QString::fromLocal8Bit("处理完成！处理后的图片已写入原始图片相同目录下！"),QMessageBox::Ok,this);
     message.exec();

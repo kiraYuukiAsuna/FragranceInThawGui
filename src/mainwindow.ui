@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1206</width>
-    <height>720</height>
+    <width>1335</width>
+    <height>905</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>481</width>
-      <height>171</height>
+      <x>10</x>
+      <y>410</y>
+      <width>651</width>
+      <height>221</height>
      </rect>
     </property>
     <property name="title">
@@ -31,7 +31,7 @@
       <rect>
        <x>140</x>
        <y>40</y>
-       <width>171</width>
+       <width>331</width>
        <height>31</height>
       </rect>
      </property>
@@ -39,7 +39,7 @@
     <widget class="QPushButton" name="pushButton_3">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>490</x>
        <y>30</y>
        <width>131</width>
        <height>51</height>
@@ -65,7 +65,7 @@
     <widget class="QPushButton" name="pushButton_4">
      <property name="geometry">
       <rect>
-       <x>90</x>
+       <x>150</x>
        <y>110</y>
        <width>131</width>
        <height>51</height>
@@ -91,7 +91,7 @@
     <widget class="QPushButton" name="pushButton_11">
      <property name="geometry">
       <rect>
-       <x>280</x>
+       <x>320</x>
        <y>110</y>
        <width>131</width>
        <height>51</height>
@@ -105,20 +105,20 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>40</y>
+      <x>10</x>
+      <y>20</y>
       <width>651</width>
-      <height>411</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="title">
-     <string>从视频文件中打开：</string>
+     <string>从视频文件中打开(单个视频处理)：</string>
     </property>
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>300</y>
+       <x>190</x>
+       <y>310</y>
        <width>141</width>
        <height>51</height>
       </rect>
@@ -130,7 +130,7 @@
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>520</x>
+       <x>540</x>
        <y>40</y>
        <width>101</width>
        <height>51</height>
@@ -143,9 +143,9 @@
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>170</x>
        <y>50</y>
-       <width>311</width>
+       <width>361</width>
        <height>41</height>
       </rect>
      </property>
@@ -153,7 +153,7 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>10</x>
        <y>50</y>
        <width>151</width>
        <height>41</height>
@@ -166,9 +166,9 @@
     <widget class="QLineEdit" name="lineEdit_3">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>170</x>
        <y>120</y>
-       <width>311</width>
+       <width>361</width>
        <height>41</height>
       </rect>
      </property>
@@ -176,7 +176,7 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>10</x>
        <y>120</y>
        <width>141</width>
        <height>41</height>
@@ -189,7 +189,7 @@
     <widget class="QPushButton" name="pushButton_7">
      <property name="geometry">
       <rect>
-       <x>520</x>
+       <x>540</x>
        <y>110</y>
        <width>101</width>
        <height>51</height>
@@ -215,7 +215,7 @@
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>20</x>
        <y>190</y>
        <width>141</width>
        <height>41</height>
@@ -244,8 +244,8 @@
     <widget class="QPushButton" name="pushButton_12">
      <property name="geometry">
       <rect>
-       <x>370</x>
-       <y>300</y>
+       <x>360</x>
+       <y>310</y>
        <width>141</width>
        <height>51</height>
       </rect>
@@ -271,33 +271,20 @@
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>470</y>
-      <width>1151</width>
-      <height>191</height>
+      <x>670</x>
+      <y>410</y>
+      <width>651</width>
+      <height>221</height>
      </rect>
     </property>
     <property name="title">
      <string>从图片文件中打开：</string>
     </property>
-    <widget class="QPushButton" name="pushButton_5">
-     <property name="geometry">
-      <rect>
-       <x>780</x>
-       <y>80</y>
-       <width>141</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>开始处理</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton_6">
      <property name="geometry">
       <rect>
-       <x>520</x>
-       <y>40</y>
+       <x>450</x>
+       <y>30</y>
        <width>101</width>
        <height>51</height>
       </rect>
@@ -309,7 +296,7 @@
     <widget class="QLineEdit" name="lineEdit_2">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>130</x>
        <y>40</y>
        <width>311</width>
        <height>41</height>
@@ -319,7 +306,7 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>10</x>
        <y>40</y>
        <width>121</width>
        <height>41</height>
@@ -332,8 +319,8 @@
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>110</y>
+       <x>10</x>
+       <y>100</y>
        <width>121</width>
        <height>41</height>
       </rect>
@@ -345,8 +332,8 @@
     <widget class="QLineEdit" name="lineEdit_4">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>110</y>
+       <x>130</x>
+       <y>100</y>
        <width>311</width>
        <height>41</height>
       </rect>
@@ -355,8 +342,8 @@
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
       <rect>
-       <x>520</x>
-       <y>110</y>
+       <x>450</x>
+       <y>90</y>
        <width>101</width>
        <height>51</height>
       </rect>
@@ -365,14 +352,27 @@
       <string>选择路径</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>160</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>开始处理</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>210</y>
-      <width>481</width>
-      <height>241</height>
+      <x>10</x>
+      <y>640</y>
+      <width>1311</width>
+      <height>231</height>
      </rect>
     </property>
     <property name="title">
@@ -579,10 +579,10 @@
     <widget class="QPushButton" name="pushButton_9">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>210</y>
-       <width>121</width>
-       <height>24</height>
+       <x>490</x>
+       <y>20</y>
+       <width>131</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
@@ -592,14 +592,193 @@
     <widget class="QPushButton" name="pushButton_10">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>30</y>
-       <width>121</width>
-       <height>24</height>
+       <x>490</x>
+       <y>80</y>
+       <width>131</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
       <string>开发者模式</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>20</y>
+      <width>651</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>从视频文件中打开（多个视频批量处理）：</string>
+    </property>
+    <widget class="QLineEdit" name="lineEdit_10">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>120</y>
+       <width>331</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>120</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>保存视频文件路径：</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_23">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>110</y>
+       <width>101</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>选择路径</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBox_13">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>200</y>
+       <width>52</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>1024</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>190</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>输出视频FPS：</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_3">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>200</y>
+       <width>181</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>根据原始视频帧率决定</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_24">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>300</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>停止处理</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_27">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>250</y>
+       <width>281</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_25">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>300</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>批量处理</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_11">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>50</y>
+       <width>331</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_28">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>待批量处理视频文件路径：</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_26">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>40</y>
+       <width>101</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>选择路径</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_29">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>250</y>
+       <width>281</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>
@@ -609,8 +788,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1206</width>
-     <height>25</height>
+     <width>1335</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -632,7 +811,6 @@
    <addaction name="menu"/>
    <addaction name="menu_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen_File">
    <property name="text">
     <string>打开视频文件</string>

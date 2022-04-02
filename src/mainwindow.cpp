@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->hide();
 
+    this->setFixedSize(QSize(this->width(),this->height()));
+
     WelcomeWindow welcomeWindow;
     welcomeWindow.show();
 
@@ -55,6 +57,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setUISettings(){
     ui->spinBox_6->setValue(mConfig.VideoOutputFPS);
+    ui->spinBox_13->setValue(mConfig.VideoOutputFPS);
 
     ui->doubleSpinBox->setValue(mConfig.Downsample_ratio);
 
@@ -519,5 +522,201 @@ void MainWindow::on_pushButton_11_clicked()
 void MainWindow::on_pushButton_12_clicked()
 {
     mSettings.currentVideoProcessStatus = false;
+}
+
+
+void MainWindow::on_pushButton_26_clicked()
+{
+    QString filePath;
+    filePath=QFileDialog::getExistingDirectory(NULL,"Video Path",".");
+    ui->lineEdit_11->setText(filePath);
+}
+
+void MainWindow::on_pushButton_23_clicked()
+{
+    QString filePath;
+    filePath=QFileDialog::getExistingDirectory(NULL,"Save Path",".");
+    ui->lineEdit_10->setText(filePath);
+}
+
+
+void MainWindow::on_pushButton_25_clicked()
+{
+    if(mSettings.currentBatchVideoProcessStatus){
+        return;
+    }
+
+    if(!std::filesystem::exists(ui->lineEdit_11->text().toStdString())){
+        QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),QString::fromLocal8Bit("请选择正确的视频文件所在路径！"),QMessageBox::Ok,this);
+        message.exec();
+        return;
+    }
+
+    if(!std::filesystem::exists(ui->lineEdit_10->text().toStdString())){
+        QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),QString::fromLocal8Bit("请选择正确的视频文件保存路径！"),QMessageBox::Ok,this);
+        message.exec();
+        return;
+    }
+
+    std::vector<std::string> videoFileList;
+
+    for(auto& videoFile : std::filesystem::recursive_directory_iterator(std::filesystem::path(ui->lineEdit_11->text().toStdString()))){
+        videoFileList.push_back(videoFile.path().string());
+    }
+
+    mSettings.currentBatchVideoProcessStatus = true;
+
+    QString totalVideoFileNumber = QString::fromStdString(std::to_string(videoFileList.size()));
+    int processedVideoFileNumber = 0;
+
+    for(auto& videoFile : videoFileList){
+        ui->label_29->setText(QString::fromLocal8Bit("已处理视频个数/总视频个数：")+QString::fromStdString(std::to_string(processedVideoFileNumber))+"/"+totalVideoFileNumber);
+        VideoProcessingFile vpf;
+
+        std::string fileName = videoFile;
+        std::string fileSavePath = ui->lineEdit_10->text().toStdString();
+
+        std::filesystem::path stdFilePath;
+        std::filesystem::path stdFileSavePath;
+        int writer_fps;
+        float downsample_ratio;
+
+        cv::Scalar backgroundColor;
+        cv::Size netInputSize(ui->spinBox_10->value(),ui->spinBox_11->value());
+
+        try{
+            stdFilePath=fileName;
+            stdFileSavePath=fileSavePath;
+        }catch(std::exception& e){
+            QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),"Exception: "+QString::fromStdString(e.what()),QMessageBox::Ok,this);
+            message.exec();
+        }
+
+        if(ui->checkBox->isChecked()){
+            writer_fps=0;
+        }else{
+            writer_fps = ui->spinBox_6->value();
+        }
+
+        downsample_ratio=ui->doubleSpinBox->value();
+
+        backgroundColor=cv::Scalar(ui->spinBox_7->value(),ui->spinBox_8->value(),ui->spinBox_9->value());
+
+        if(std::filesystem::exists(stdFilePath) && std::filesystem::exists(stdFileSavePath)){
+            if(vpf.openFile(fileName)){
+                std::string outputFileName = stdFileSavePath.string()+"/output_"+stdFilePath.filename().string();
+                // 0. init video capture
+                cv::VideoCapture video_capture(fileName);
+                const unsigned int width = video_capture.get(cv::CAP_PROP_FRAME_WIDTH);
+                const unsigned int height = video_capture.get(cv::CAP_PROP_FRAME_HEIGHT);
+                const unsigned int frame_count = video_capture.get(cv::CAP_PROP_FRAME_COUNT);
+                if (writer_fps == 0)// not setting fps, we consider it as the input video fps
+                {
+                    writer_fps = video_capture.get(cv::CAP_PROP_FPS);
+                }
+                if (!video_capture.isOpened())
+                {
+                    QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),"Exception: "+QString::fromStdString("不能打开视频文件：")+QString::fromStdString(fileName),QMessageBox::Ok,this);
+                    message.exec();
+                    return;
+                }
+                // 1. init video writer
+                cv::VideoWriter video_writer(outputFileName, cv::VideoWriter::fourcc('m', 'p', '4', 'v'),
+                                             writer_fps, cv::Size(width, height));
+                if (!video_writer.isOpened())
+                {
+                    QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),"Exception: "+QString::fromStdString("不能创建处理后视频的输出文件：")+QString::fromStdString(outputFileName),QMessageBox::Ok,this);
+                    message.exec();
+                    return;
+                }
+
+                if(width<netInputSize.width && height<netInputSize.height){
+                    netInputSize=cv::Size(width,height);
+                }
+
+                // 2. matting loop
+                auto totalFrameCount = QString::fromStdString(std::to_string(frame_count));
+                unsigned int i = 0;
+                cv::Mat mat;
+                while (video_capture.read(mat))
+                {
+                    if(!mSettings.currentBatchVideoProcessStatus){
+                        QMessageBox message(QMessageBox::Information,QString::fromLocal8Bit("提示："),QString::fromLocal8Bit("停止处理成功！"),QMessageBox::Ok,this);
+                        message.exec();
+                        std::filesystem::remove(std::filesystem::path(outputFileName));
+                        ui->label_27->setText("");
+                        ui->label_29->setText("");
+                        return;
+                    }
+
+                    auto ct1 = std::chrono::high_resolution_clock::now();
+                    auto t1 = std::chrono::time_point_cast<std::chrono::milliseconds>(ct1).time_since_epoch()
+                              .count();
+                    i += 1;
+
+                    cv::Mat resizedImg;
+                    cv::resize(mat, resizedImg, netInputSize);
+
+                    MattingContent content;
+                    mRobustVideoMatting->detect(resizedImg, content, downsample_ratio, backgroundColor, true); // video_mode true
+
+
+                    cv::resize(content.merge_mat, mat, cv::Size(width, height));
+
+
+                    // 3. save contents and writing out.
+                    if (content.flag)
+                    {
+                        if (mSettings.saveVideoContents) {
+                            mVideoContents.push_back(content);
+                        }
+                        if (!content.merge_mat.empty())
+                        {
+                            video_writer.write(mat);
+                        }
+                    }
+                    // 4. check context states.
+                    if (!mRobustVideoMatting->context_is_update) break;
+
+                    auto ct2 = std::chrono::high_resolution_clock::now();
+                    auto t2 = std::chrono::time_point_cast<std::chrono::milliseconds>(ct2).time_since_epoch()
+                              .count();
+
+                    ui->label_27->setText(QString::fromLocal8Bit("已处理帧数/总帧数：")+QString::fromStdString(std::to_string(i))+"/"+totalFrameCount);
+
+                    //std::cout << "time consume is : " << t2 - t1 << "\n";
+
+                    //std::cout << i << "/" << frame_count << " done!" << "\n";
+
+                    qApp->processEvents();
+                }
+
+                // 5. release
+                video_capture.release();
+                video_writer.release();
+
+            }else{
+                QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),QString::fromLocal8Bit("打开指定的视频文件失败！"),QMessageBox::Ok,this);
+                message.exec();
+            }
+        }else{
+            QMessageBox message(QMessageBox::Warning,QString::fromLocal8Bit("错误："),QString::fromLocal8Bit("没有找到指定的视频文件！"),QMessageBox::Ok,this);
+            message.exec();
+        }
+        processedVideoFileNumber++;
+    }
+
+    mSettings.currentBatchVideoProcessStatus = false;
+    QMessageBox message(QMessageBox::Information,QString::fromLocal8Bit("提示："),QString::fromLocal8Bit("视频处理完成，输出的处理后的视频文件已存放到指定文件夹下！"),QMessageBox::Ok,this);
+    message.exec();
+
+    ui->label_27->setText("");
+    ui->label_29->setText("");
+}
+
+
+void MainWindow::on_pushButton_24_clicked()
+{
+    mSettings.currentBatchVideoProcessStatus=false;
 }
 

@@ -4,6 +4,8 @@
 #include <QString>
 #include <QFontDatabase>
 #include <QFont>
+#include <QFile>
+#include <QTextStream>
 
 int main(int argc, char *argv[])
 {

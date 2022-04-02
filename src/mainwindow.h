@@ -18,6 +18,7 @@ struct Settings{
 
     bool currentCameraProcessStatus = false;
     bool currentVideoProcessStatus = false;
+    bool currentBatchVideoProcessStatus = false;
 };
 
 class MainWindow : public QMainWindow
@@ -83,6 +84,14 @@ private slots:
     void on_pushButton_11_clicked();
 
     void on_pushButton_12_clicked();
+
+    void on_pushButton_26_clicked();
+
+    void on_pushButton_23_clicked();
+
+    void on_pushButton_25_clicked();
+
+    void on_pushButton_24_clicked();
 
 private:
     Ui::MainWindow *ui;

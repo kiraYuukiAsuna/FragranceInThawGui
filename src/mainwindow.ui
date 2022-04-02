@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>A05-实时人像分割-演示程序 - by Team OnTheWay</string>
+   <string>Neural Clipper(深度剪辑手) - A05-实时人像分割-演示程序 - by Team OnTheWay</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox">
